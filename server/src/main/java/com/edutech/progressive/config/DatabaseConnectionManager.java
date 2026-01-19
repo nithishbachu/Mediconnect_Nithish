@@ -21,7 +21,7 @@ public class DatabaseConnectionManager {
             e.printStackTrace();
         }
     }
-    public static Connection getConnection() throws SQLException, IOException{
+    public static Connection getConnection() throws SQLException{
         loadProperties();
         String url = properties.getProperty("spring.datasource.url");
         String username = properties.getProperty("spring.datasource.username");
