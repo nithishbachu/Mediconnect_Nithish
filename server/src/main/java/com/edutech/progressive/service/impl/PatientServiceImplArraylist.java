@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.edutech.progressive.entity.Patient;
 import com.edutech.progressive.service.PatientService;
-
+// @Service
 public class PatientServiceImplArraylist implements PatientService {
     private static List<Patient> patientList = new ArrayList<>();
     
