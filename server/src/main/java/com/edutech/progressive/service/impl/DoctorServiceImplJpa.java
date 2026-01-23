@@ -15,12 +15,13 @@ import com.edutech.progressive.service.DoctorService;
 public class DoctorServiceImplJpa implements DoctorService {
 
     private DoctorRepository doctorRepository;
+
+    @Autowired
     private ClinicRepository clinicRepository;
 
     @Autowired
-    public DoctorServiceImplJpa(DoctorRepository doctorRepository,ClinicRepository clinicRepository) {
+    public DoctorServiceImplJpa(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
-        this.clinicRepository=clinicRepository;
     }
 
     @Override
