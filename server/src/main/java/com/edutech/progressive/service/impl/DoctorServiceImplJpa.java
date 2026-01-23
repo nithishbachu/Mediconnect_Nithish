@@ -8,16 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edutech.progressive.entity.Doctor;
+import com.edutech.progressive.repository.ClinicRepository;
 import com.edutech.progressive.repository.DoctorRepository;
 import com.edutech.progressive.service.DoctorService;
 @Service
 public class DoctorServiceImplJpa implements DoctorService {
 
     private DoctorRepository doctorRepository;
+    private ClinicRepository clinicRepository;
 
     @Autowired
-    public DoctorServiceImplJpa(DoctorRepository doctorRepository) {
+    public DoctorServiceImplJpa(DoctorRepository doctorRepository,ClinicRepository clinicRepository) {
         this.doctorRepository = doctorRepository;
+        this.clinicRepository=clinicRepository;
     }
 
     @Override
@@ -32,10 +35,10 @@ public class DoctorServiceImplJpa implements DoctorService {
 
     @Override
     public List<Doctor> getDoctorSortedByExperience() throws Exception {
-        List<Doctor> patientList = doctorRepository.findAll();
-        patientList.sort(Comparator.comparing(Doctor::getFullName));
-        return patientList;
-    };
+        List<Doctor> doctorList = doctorRepository.findAll();
+        doctorList.sort(Comparator.comparing(Doctor::getFullName));
+        return doctorList;
+    }
 
     @Override
     public void updateDoctor(Doctor doctor) throws Exception {
@@ -44,6 +47,7 @@ public class DoctorServiceImplJpa implements DoctorService {
 
     @Override
     public void deleteDoctor(int doctorId) throws Exception {
+        clinicRepository.deleteByDoctorId(doctorId);
         doctorRepository.deleteById(doctorId);
     }
 
